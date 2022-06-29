@@ -56,12 +56,15 @@
           var ldl = byCodes('2089-1');
           var temperature = byCodes('8310-5');
           
+          //Open the HTML tag for the table
           var ai_table = "<table>";
-          var ai_length = ai.length;
-          for (var i = 0; i < ai_length; i++){
-              ai_table += "<tr><td>"+ai[i].code.text+"</td></tr>";
-            }
           
+          //Go through the different AllergyInteolerance resources, and get the code.text.
+          for (var i = 0; i < ai.length; i++){
+              ai_table += "<tr><td>"+ai[i].code.text+"</td></tr>";
+          }
+          
+          //Close the HTML tag for the table
           ai_table += "</table>";
 
           var p = defaultPatient();
