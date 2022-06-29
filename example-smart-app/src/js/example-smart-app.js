@@ -57,11 +57,7 @@
           var temperature = byCodes('8310-5');
           
           //Open the HTML tag for the table
-          var ai_table = "<table><tr>
-                              <th>Name</th>
-                              <th>Criticality</th>
-                              <th>Clinical Status</th>
-                              </tr>";
+          var ai_table = "<table><tr><th>Name</th><th>Criticality</th><th>Clinical Status</th></tr>";
           
           //Go through the different AllergyInteolerance resources, and get the code.text.
           for (var i = 0; i < ai.length; i++){
