@@ -15,9 +15,11 @@
                     type: 'Observation',
                     query: {
                       code: {
-                        $or: ['http://loinc.org|8302-2', 'http://loinc.org|85354-9',
+                        $or: ['http://loinc.org|8302-2', 
+                              'http://loinc.org|85354-9',
                               'http://loinc.org|2085-9',
-                              'http://loinc.org|2089-1', 'http://loinc.org|55284-4', 
+                              'http://loinc.org|2089-1', 
+                              'http://loinc.org|55284-4', 
                               'http://loinc.org|8310-5'
                           ]
                       }
@@ -87,7 +89,7 @@
           ai_table += "</table>";
           
           //Open the HTML tag for the table
-          var imm_table = "<table><tr><th>Vaccine</th><th>Status</th><th>Status Reason</th></tr>";
+          var imm_table = "<table><tr><th>Vaccine</th><th>Admin Date</th><th>Status</th><th>Status Reason</th></tr>";
           
           var imm_length = imm.length;
           
@@ -97,6 +99,8 @@
               imm_table += "<tr>";
             
               imm_table += "<td>" + imm[i].vaccineCode.text + "</td>";
+            
+              imm_table += "<td>" + imm[i].occurrenceDateTime + "</td>";
             
               imm_table += "<td>" + imm[i].status + "</td>";
             
