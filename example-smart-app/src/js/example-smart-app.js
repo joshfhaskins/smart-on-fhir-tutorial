@@ -23,12 +23,21 @@
                       }
                     }
                   });
+         var ai = smart.patient.api.fetchAll({
+                    type: 'AllergyIntolerance',
+                    query: {
+                      "clinical-status": 'active'
+                    }
+                  });
 
-        $.when(pt, obv).fail(onError);
+        $.when(pt, obv, ai).fail(onError);
 
-        $.when(pt, obv).done(function(patient, obv) {
+        $.when(pt, obv, ai).done(function(patient, obv, ai) {
+          
           console.log(patient);
           console.log(obv);
+          console.log(ai);
+          
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
 
@@ -46,6 +55,21 @@
           var hdl = byCodes('2085-9');
           var ldl = byCodes('2089-1');
           var temperature = byCodes('8310-5');
+          var ai_table = "<table>";
+          var ai_length = ai.length;
+          for (var i=0;i<ai_length;i++){
+              var ai_reaction = [];
+              if(ai[i].reaction !== undefined) {
+                for(var j=0,jLen=ai[i].reaction.length;j<jLen;j++) {
+                  ai_reaction.push(ai[i].reaction[j].manifestation[0].text);
+                }
+              }
+              ai_table += "<tr><td>"+ai[i].code.text+"</td><td>"+ai_reaction.join(", ")+"</td></tr>";
+            }
+            if (ai_length === 0) {
+              ai_table += "<tr><td>Allergies Not Found</td></tr>";
+            }
+            ai_table += "</table>";
 
           var p = defaultPatient();
           p.birthdate = patient.birthDate;
@@ -66,6 +90,7 @@
           p.ldl = getQuantityValueAndUnit(ldl[0]);
           p.temperature = getQuantityValueAndUnit(temperature[0]);
 
+          p.ai = ai_table;
 
           ret.resolve(p);
         });
@@ -91,6 +116,7 @@
       ldl: {value: ''},
       hdl: {value: ''},
       temperature: {value: ''},
+      ai: {value: ''},
     };
   }
 
@@ -135,6 +161,7 @@
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
     $('#temperature').html(p.temperature);
+    $('#ai').html(p.ai);
   };
 
 })(window);
