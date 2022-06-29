@@ -62,8 +62,8 @@
           //Go through the different AllergyInteolerance resources, and get the code.text.
           for (var i = 0; i < ai.length; i++){
               //Add in new row for each AllergyInteolerance.
-              ai_table += "<tr>
-                  <td>" + ai[i].code.text + "</td>" 
+              ai_table += "<tr>"
+                + "<td>" + ai[i].code.text + "</td>" 
                 + "<td>" + ai[i].criticality + "</td>" 
                 + "<td>" + ai[i].clinicalStatus.text + "</td>" 
                 + "</tr>";
