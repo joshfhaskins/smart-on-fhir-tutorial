@@ -94,11 +94,19 @@
           //Go through the different Immunization resources, and get the code.text.
           for (var i = 0; i < imm_length; i++){
               //Add in new row for each Immunization.
-              imm_table += "<tr>"
-                + "<td>" + imm[i].vaccineCode.text + "</td>" 
-                + "<td>" + imm[i].status + "</td>" 
-                + "<td>" + imm[i].statusReason.text + "</td>" 
-                + "</tr>";
+              imm_table += "<tr>";
+            
+              imm_table += "<td>" + imm[i].vaccineCode.text + "</td>";
+            
+              imm_table += "<td>" + imm[i].status + "</td>";
+            
+              if(ai[i].clinicalStatus.text !== undefined) {
+                  imm_table += "<td>" + imm[i].statusReason.text + "</td>";
+              } else {
+                  imm_table += "<td>" + "</td>";
+              }
+              
+              imm_table += "</tr>";
           }
           
           //Close the HTML tag for the table
