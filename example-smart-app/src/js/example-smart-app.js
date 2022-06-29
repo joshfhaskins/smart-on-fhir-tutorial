@@ -68,14 +68,19 @@
           
           //Go through the different AllergyInteolerance resources, and get the code.text.
           for (var i = 0; i < ai_length; i++){
+              
               //Add in new row for each AllergyInteolerance.
-              ai_table += "<tr>"
-                + "<td>" + ai[i].code.text + "</td>" 
-                + "<td>" + ai[i].criticality + "</td>" 
-                + "<td>" + if(ai[i].clinicalStatus.text !== undefined) {
-                              ai[i].clinicalStatus.text
-                            } + "</td>" 
-                + "</tr>";
+              ai_table += "<tr>" + "<td>" + ai[i].code.text + "</td>";
+              
+              ai_table += "<td>" + ai[i].criticality + "</td>";
+              
+              if(ai[i].clinicalStatus.text !== undefined) {
+                  ai_table += "<td>" + ai[i].clinicalStatus.text + "</td>";
+              } else {
+                  ai_table += "<td>" + "</td>";
+              }
+              
+              ai_table += "</tr>";
           }
           
           //Close the HTML tag for the table
