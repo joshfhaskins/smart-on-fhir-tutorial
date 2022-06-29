@@ -55,21 +55,14 @@
           var hdl = byCodes('2085-9');
           var ldl = byCodes('2089-1');
           var temperature = byCodes('8310-5');
+          
           var ai_table = "<table>";
           var ai_length = ai.length;
-          for (var i=0;i<ai_length;i++){
-              var ai_reaction = [];
-              if(ai[i].reaction !== undefined) {
-                for(var j=0,jLen=ai[i].reaction.length;j<jLen;j++) {
-                  ai_reaction.push(ai[i].reaction[j].manifestation[0].text);
-                }
-              }
-              ai_table += "<tr><td>"+ai[i].code.text+"</td><td>"+ai_reaction.join(", ")+"</td></tr>";
+          for (var i = 0; i < ai_length; i++){
+              ai_table += "<tr><td>"+ai[i].code.text+"</td></tr>";
             }
-            if (ai_length === 0) {
-              ai_table += "<tr><td>Allergies Not Found</td></tr>";
-            }
-            ai_table += "</table>";
+          
+          ai_table += "</table>";
 
           var p = defaultPatient();
           p.birthdate = patient.birthDate;
