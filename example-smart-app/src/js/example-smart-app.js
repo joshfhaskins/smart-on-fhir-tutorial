@@ -100,7 +100,7 @@
             
               imm_table += "<td>" + imm[i].status + "</td>";
             
-              if(ai[i].clinicalStatus.text !== undefined) {
+              if(imm[i].statusReason.text !== undefined) {
                   imm_table += "<td>" + imm[i].statusReason.text + "</td>";
               } else {
                   imm_table += "<td>" + "</td>";
