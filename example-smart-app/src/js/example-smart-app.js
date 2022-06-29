@@ -100,8 +100,12 @@
             
               imm_table += "<td>" + imm[i].status + "</td>";
             
-              if(imm[i].statusReason.text !== undefined) {
-                  imm_table += "<td>" + imm[i].statusReason.text + "</td>";
+              if(imm[i].statusReason !== undefined) {
+                  if(imm[i].statusReason.text !== undefined) {
+                      imm_table += "<td>" + imm[i].statusReason.text + "</td>";
+                  } else {
+                      imm_table += "<td>" + "</td>";
+                  }
               } else {
                   imm_table += "<td>" + "</td>";
               }
