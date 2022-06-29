@@ -72,7 +72,9 @@
               ai_table += "<tr>"
                 + "<td>" + ai[i].code.text + "</td>" 
                 + "<td>" + ai[i].criticality + "</td>" 
-                + "<td>" + ai[i].clinicalStatus.text + "</td>" 
+                + "<td>" + if(ai[i].clinicalStatus.text !== undefined) {
+                              ai[i].clinicalStatus.text
+                            } + "</td>" 
                 + "</tr>";
           }
           
