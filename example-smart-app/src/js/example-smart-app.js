@@ -61,7 +61,7 @@
           
           //Go through the different AllergyInteolerance resources, and get the code.text.
           for (var i = 0; i < ai.length; i++){
-              ai_table += "<tr><td>"+ai[i].code.text+"</td></tr>";
+              ai_table += "<tr><td>"+ai[i].code.text+"</td><td>"+ai[i]."clinical-status".text+"</td></tr>";
           }
           
           //Close the HTML tag for the table
