@@ -29,14 +29,19 @@
                       "clinical-status": 'active'
                     }
                   });
+        
+          var imm = smart.patient.api.fetchAll({
+                    type: 'Immunization'
+                  });
 
-        $.when(pt, obv, ai).fail(onError);
+        $.when(pt, obv, ai, imm).fail(onError);
 
-        $.when(pt, obv, ai).done(function(patient, obv, ai) {
+        $.when(pt, obv, ai, imm).done(function(patient, obv, ai, imm) {
           
           console.log(patient);
           console.log(obv);
           console.log(ai);
+          console.log(imm);
           
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
@@ -59,8 +64,10 @@
           //Open the HTML tag for the table
           var ai_table = "<table><tr><th>Name</th><th>Criticality</th><th>Clinical Status</th></tr>";
           
+          var ai_length = ai.length;
+          
           //Go through the different AllergyInteolerance resources, and get the code.text.
-          for (var i = 0; i < ai.length; i++){
+          for (var i = 0; i < ai_length; i++){
               //Add in new row for each AllergyInteolerance.
               ai_table += "<tr>"
                 + "<td>" + ai[i].code.text + "</td>" 
@@ -71,6 +78,24 @@
           
           //Close the HTML tag for the table
           ai_table += "</table>";
+          
+          //Open the HTML tag for the table
+          var imm_table = "<table><tr><th>Vaccine</th><th>Status</th><th>Status Reason</th></tr>";
+          
+          var imm_length = imm.length;
+          
+          //Go through the different Immunization resources, and get the code.text.
+          for (var i = 0; i < imm_length; i++){
+              //Add in new row for each Immunization.
+              imm_table += "<tr>"
+                + "<td>" + imm[i].vaccineCode.text + "</td>" 
+                + "<td>" + imm[i].status + "</td>" 
+                + "<td>" + imm[i].cstatusReason.text + "</td>" 
+                + "</tr>";
+          }
+          
+          //Close the HTML tag for the table
+          imm_table += "</table>";
 
           var p = defaultPatient();
           p.birthdate = patient.birthDate;
@@ -92,6 +117,7 @@
           p.temperature = getQuantityValueAndUnit(temperature[0]);
 
           p.ai = ai_table;
+          p.imm = imm_table;
 
           ret.resolve(p);
         });
@@ -118,6 +144,7 @@
       hdl: {value: ''},
       temperature: {value: ''},
       ai: {value: ''},
+      imm: {value: ''},
     };
   }
 
@@ -163,6 +190,7 @@
     $('#hdl').html(p.hdl);
     $('#temperature').html(p.temperature);
     $('#ai').html(p.ai);
+    $('#imm').html(p.imm);
   };
 
 })(window);
