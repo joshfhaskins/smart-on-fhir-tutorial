@@ -61,7 +61,8 @@
           
           //Go through the different AllergyInteolerance resources, and get the code.text.
           for (var i = 0; i < ai.length; i++){
-              ai_table += "<tr><td>"+ai[i].code.text+"</td></tr>";
+              //Add in new row and cell for the code.text.
+              ai_table += "<tr><td>" + ai[i].code.text + "</td>" + "<td>" + ai[i].criticality + "</td>" + "</tr>";
           }
           
           //Close the HTML tag for the table
