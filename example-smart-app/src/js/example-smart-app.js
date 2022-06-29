@@ -90,7 +90,7 @@
               imm_table += "<tr>"
                 + "<td>" + imm[i].vaccineCode.text + "</td>" 
                 + "<td>" + imm[i].status + "</td>" 
-                + "<td>" + imm[i].cstatusReason.text + "</td>" 
+                + "<td>" + imm[i].statusReason.text + "</td>" 
                 + "</tr>";
           }
           
